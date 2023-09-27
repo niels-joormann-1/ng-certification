@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http'
-import { map } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class WeatherService {
     var location = this.getLocation(zipcode)
   }
 
-  private getLocation(zipcode: string) {
+  private getLocation(zipcode: string): Location{
     this.httpClient.get<Location>(this.locationEndpoint, { params: new HttpParams().set('zip', `${zipcode},US`).set('appid', this.appId) })
       .pipe(
         map(response => {
@@ -25,8 +25,8 @@ export class WeatherService {
           return (response as Location)
         })
       )
-      .subscribe(response => {
-
-      })
+      .subscribe(location => {
+        return location;
+    })
   }
 }

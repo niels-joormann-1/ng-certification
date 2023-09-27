@@ -1,6 +1,6 @@
 import { ZipcodeService } from '../zipcode.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-zipcode-form',
@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class ZipcodeFormComponent implements OnInit {
 
-  zipcodeForm = new FormGroup({ zipcode: new FormControl() })
+  zipcodeForm = new UntypedFormGroup({ zipcode: new UntypedFormControl() })
 
   constructor(private zipcodeService: ZipcodeService) { }
 

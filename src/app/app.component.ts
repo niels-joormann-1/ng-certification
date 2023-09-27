@@ -16,7 +16,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     //console.info('init')
-    this.zipcodeSubscription = this.zipcodeService.zipcodes$.subscribe(z =>
+    this.zipcodeSubscription = this.zipcodeService.zipcodes$.subscribe((z: string[]) =>
     {
       //console.info(z);
       this.zipcodes = z;
