@@ -27,7 +27,12 @@ export class WeatherService {
 
   private getLocation(zipcode: string)
   {
-    return this.httpClient.get<Location>(this.locationEndpoint, { params: new HttpParams().set('zip', `${zipcode},US`).set('appid', this.appId) })
+    return this.httpClient.get<Location>(this.locationEndpoint,
+      {
+      params: new HttpParams()
+        .set('zip', `${zipcode},US`)
+        .set('appid', this.appId)
+    })
       .pipe(
         map(response => {
           console.info(response);
