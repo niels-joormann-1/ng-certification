@@ -1,12 +1,13 @@
 /* Add application styles & imports to this file! */
+@import url(../node_modules/bootstrap/dist/css/bootstrap.min.css);
 
 .flex {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
 }
 
 body {
@@ -14,9 +15,9 @@ body {
 }
 
 .icon {
-  width: 45px;
-  height: 45px;
-  position: absolute;
-  right: 20px;
-  top: -2px;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    right: 20px;
+    top: -2px;
 }

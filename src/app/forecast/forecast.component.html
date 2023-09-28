@@ -1,0 +1,17 @@
+<div class="container-fluid" *ngIf="forecast">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">5-day forecasting for {{forecast.city.name}}</h3>
+
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let weather of forecast.list">
+        {{weather.dt_txt | date:'short':'nl' }}:
+        {{weather.weather[0].description}}
+        - Min: {{weather.main.temp_max}}
+        - Max: {{weather.main.temp_min}}
+        <img class="icon" src="{{weather.icon}}">
+      </li>
+    </ul>
+  </div>
+  <button class="btn btn-success" tabindex="0" id="mainPageBtn" (click)="redirectToHome()">&lt; Back to main page</button>

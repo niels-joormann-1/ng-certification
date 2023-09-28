@@ -47,6 +47,14 @@ export class ZipcodeService {
       return;
     }
     this.zipcodes.next(JSON.parse(existingStorage));
-    console.info(existingStorage);
+    //console.info(existingStorage);
+  }
+
+  deleteZipcode(zipcode: string)
+  {
+    console.info('delete');
+    var updatedZipcodes = this.zipcodes.value.filter(z => z !== zipcode);
+    localStorage.setItem('zipcodes', JSON.stringify(updatedZipcodes));
+    this.zipcodes.next(updatedZipcodes);
   }
 }

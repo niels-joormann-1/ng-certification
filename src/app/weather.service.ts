@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http'
-import { map, Observable, of } from 'rxjs';
-import {Location} from '../app/location.model'
+import { Observable, map } from 'rxjs';
+import { Weather } from './weatherinfo.model';
+import { Forecast } from './forecast.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,38 +10,61 @@ import {Location} from '../app/location.model'
 export class WeatherService {
 
   constructor(private httpClient: HttpClient) { }
-
-  locationEndpoint = `http://api.openweathermap.org/geo/1.0/zip` //?zip=95742,US&appid=5a4b2d457ecbef9eb2a71e480b947604`;
-  weatherEndpoint = `https://api.openweathermap.org/data/3.0/onecall`
   appId = `5a4b2d457ecbef9eb2a71e480b947604`;
 
-  getWeatherReport(zipcode: string) {
-    console.info(`getWeatherReport for ${zipcode}`);
-    var location = this.getLocation(zipcode);
-    var result = this.httpClient.get(this.weatherEndpoint, {
-      params: new HttpParams()
-        .set('lat', location.lat)
-        .set('lon', location.lon)
-        .set('appid', this.appId)
-    }).subscribe(response => { return response; })
+  weatherEndpoint = `http://api.openweathermap.org/data/2.5/weather`; //?zip=95742,US&appid=5a4b2d457ecbef9eb2a71e480b947604`;
+  forecastEndpoint = `https://api.openweathermap.org/data/2.5/forecast`; //https://api.openweathermap.org/data/2.5/forecast?zip=20500&appid=5a4b2d457ecbef9eb2a71e480b947604
+  iconEndpoint = "https://www.angulartraining.com/images/weather";
+
+  getWeatherReport(zipcode: string): Observable<Weather> {
+    //console.info(`getWeatherReport for ${zipcode}`);
+    return this.httpClient
+      .get(this.weatherEndpoint,
+        {
+          params: new HttpParams()
+            .set('zip', `${zipcode},US`)
+            .set('appid', this.appId)
+        }).pipe(
+          map((response) => {
+            //console.info(response);
+            return response as Weather;
+          }));
   }
 
-  private getLocation(zipcode: string)
-  {
-    return this.httpClient.get<Location>(this.locationEndpoint,
-      {
-      params: new HttpParams()
-        .set('zip', `${zipcode},US`)
-        .set('appid', this.appId)
-    })
-      .pipe(
-        map(response => {
-          console.info(response);
-          return (response as Location)
-        })
-      )
-      .subscribe(location => {
-        return location;
-    })
+  getForecast(zipcode: string): Observable<Forecast> {
+    console.info(zipcode);
+    return this.httpClient
+      .get(this.forecastEndpoint,
+        {
+          params: new HttpParams()
+            .set('zip', zipcode)
+            .set('appid', this.appId)
+        }).pipe(
+          map((response) => {
+            console.info(response);
+            return response as Forecast;
+          }));
+  }
+
+  getIcon(description: string) {
+    switch (description) {
+      case 'clouds':
+      case 'fog':
+      case 'overcast clouds':
+      case 'scattered clouds':
+      case 'few clouds':
+      case 'broken clouds':
+        return `${this.iconEndpoint}/clouds.png`;
+      case 'rain':
+      case 'light rain':
+        return `${this.iconEndpoint}/rain.png`;
+      case 'snow':
+        return `${this.iconEndpoint}/snow.png`;
+      case 'clear sky':
+      case 'sun':
+        return `${this.iconEndpoint}/sun.png`;
+      default:
+        return 'unknown';
+    }
   }
 }

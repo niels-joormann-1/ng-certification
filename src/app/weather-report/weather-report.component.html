@@ -1,23 +1,27 @@
-<div class="container-fluid"> 
-    <div>
-      <div class="well flex">
-        <div>
-          <h3>{{zipcode}}</h3>
-          <h4>Current conditions: Clouds</h4>
-          <h4>Temperatures today:</h4>
-          <p>
-            Current 58
-            - Max 65
-            - Min 48
-          </p>
-          <p>
-            <a href="/forecast/95742">Show 5-day forecast for Rancho Cordova</a>
-          </p>
-        </div>
-        <div>
-          <span class="close">×</span>
-          <img src="https://www.angulartraining.com/images/weather/sun.png">
+<div class="container-fluid" *ngIf="weather">
+  <div>
+    <div class="well flex">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h3>{{zipcode}} {{weather.name}}</h3>
+            <h4>Current conditions: {{weather.weather[0].description ?? "unknown"}}</h4>
+            <h4>Temperatures today:</h4>
+            <p>
+              Current: {{weather.main.temp}}
+              - Max {{weather.main.temp_max}}
+              - Min {{weather.main.temp_min}}
+            </p>
+            <p>
+              <a href="/forecast/{{zipcode}}">Show 5-day forecast for {{weather.name}}</a>
+            </p>
+          </div>
+          <div class="col">
+            <button class="close" (click)="deleteZipcode()">Close</button>
+            <img src="{{weather.icon}}">
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>

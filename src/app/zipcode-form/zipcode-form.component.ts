@@ -5,7 +5,7 @@ import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 @Component({
   selector: 'app-zipcode-form',
   templateUrl: './zipcode-form.component.html',
-  styleUrls: ['./zipcode-form.component.css']
+  styleUrls: ['./zipcode-form.component.css', '../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
 })
 export class ZipcodeFormComponent implements OnInit {
 
