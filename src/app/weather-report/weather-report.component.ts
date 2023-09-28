@@ -6,7 +6,7 @@ import { ZipcodeService } from '../zipcode.service';
 @Component({
   selector: 'app-weather-report',
   templateUrl: './weather-report.component.html',
-  styleUrls: ['./weather-report.component.css', '../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
+  styleUrls: ['./weather-report.component.css']
 })
 export class WeatherReportComponent implements OnInit {
 

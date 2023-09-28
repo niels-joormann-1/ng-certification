@@ -6,7 +6,7 @@ import { Forecast } from '../forecast.model';
 @Component({
   selector: 'app-forecast',
   templateUrl: './forecast.component.html',
-  styleUrls: ['./forecast.component.css', '../../../node_modules/bootstrap/dist/css/bootstrap.min.css']
+  styleUrls: ['./forecast.component.css']
 })
 export class ForecastComponent implements OnInit {
   zipcode: string = "";
